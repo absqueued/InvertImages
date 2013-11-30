@@ -12,7 +12,7 @@ Invert White Images to Black using SVG, targeted for IE 10 as CSS3 Filters repla
 - Internet Explorer 10+
 
 ###CSS filter Support
-As of writing this, Google Chrome supports prefix version of CSS Filters hence this plugin will do nothing instead usage `-webkit-filter:invert(1);` to invert demo imgages. You should be doing same.
+At the time of writing this, Google Chrome supports prefix version of CSS Filters hence this plugin will do nothing instead usage `-webkit-filter:invert(1);` to invert demo images. You should be doing same.
 
 
 ###Demo
