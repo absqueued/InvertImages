@@ -63,8 +63,25 @@
 		
 		<a href="https://github.com/shekhardesigner/InvertImage" class="btn btn-primary btn-lg">Fork/Download in Github</a>
         <button class="btn btn-primary btn-lg toggleInvert">Destroy SVG Filter</button>
-        <hr /><br />
+        <hr /><br /><br />
 	</div>
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=125381117600543";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <nav class="navbar navbar-default navbar-fixed-bottom fork-toolbar" role="navigation">
+        <div class="container">
+            <a class="btn btn-sm btn-primary" href="https://github.com/shekhardesigner/InvertImages">Fork in Github</a>
+            <a class="btn btn-sm btn-success" href="https://github.com/shekhardesigner/InvertImages/archive/gh-pages.zip">Download Source</a>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-via="shekhardesigner">Tweet</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+            <div class="fb-like" data-href="http://shekhardesigner.github.io/InvertImages/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+        </div>
+    </nav>
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="jquery.invertImages.js"></script>
 	<script>
