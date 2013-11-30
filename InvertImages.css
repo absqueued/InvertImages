@@ -1,0 +1,9 @@
+﻿.thumbnail svg {
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+}
+
+.invert-it {
+    -webkit-filter:invert(1);
+}

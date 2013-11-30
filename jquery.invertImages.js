@@ -13,11 +13,11 @@
 			svgImage: 1,
 			svgSource: "",
 			svgContent: "",
-			cssSupport: false,
+			cssFilters: false,
 			destroy: false
         };
 
-    function InvertImage(elm, options) {
+    function InvertImages(elm, options) {
         this.element = elm;
 		this.$elm = $(elm);
 
@@ -33,12 +33,14 @@
         this.init();
     }
 
-    InvertImage.prototype = {
+    InvertImages.prototype = {
 
-        init: function() {
+        //Build SVG and Append
+        init: function () {
 		
-			//future extension to check css support and then only process with SVG
-			//this.options.cssSupport = this.cssSupport('filter');
+            this.options.cssFilters = this.cssSupport("cssfilters");
+            
+            if (this.options.cssFilters) return false;
 			
 			this.options.svgWidth = this.$elm.width();
 			this.options.svgHeight = this.$elm.height();
@@ -60,38 +62,26 @@
 
 			this.$elm.after(this.options.svgContent);
 			this.options.svgImage++;
-
+			$("html").addClass("inverted");
         },
 
-        //Future extension, to detect CSS support. If supported  then prevent SVG processing.
-		cssSupport: function(prop) {
-			var div = document.createElement('div'),
-				vendors = ['Khtml', 'Ms', 'O', 'Moz', 'Webkit'],  
-				vendorsLen = vendors.length;  
-			  
-			if ((prop in div.style)) return true;
-
-			prop = prop.replace(/^[a-z]/, function(val) {  
-			 return val.toUpperCase();  
-			});  
-
-			while(vendorsLen--) {  
-				if ( vendors[vendorsLen] + prop in div.style ) {  
-					return true;  
-				}   
-			}  
-			return false;  
+        //Check CSS Support using Modernizr
+        cssSupport: function (prop) {
+		    if (Modernizr && Modernizr[prop]) return true;
+		    return false;
         },
 		
+        //Destroy the SVG Built
 		destroy: function(elm, options){
 			this.$elm.removeClass('hide');
 			$(this.$elm.next()).remove();
+			$("html").removeClass("inverted");
 		}
     };
 
     $.fn.invertImages = function (options) {
         return this.each(function () {
-			$.data(this, "invertImages", new InvertImage(this, options));
+			$.data(this, "invertImages", new InvertImages(this, options));
         });
     };
 

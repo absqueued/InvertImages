@@ -4,13 +4,8 @@
 	<meta charset="utf-8">
 	<title>Invert Images</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<style>		
-		.thumbnail svg {
-			margin-left:auto;
-			margin-right:auto;
-			display:block;
-		}
-	</style>
+    <link rel="stylesheet" href="InvertImages.css">
+    <script src="Modernizr.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -67,12 +62,26 @@
 		</div>
 		
 		<a href="https://github.com/shekhardesigner/InvertImage" class="btn btn-primary btn-lg">Fork/Download in Github</a>
+        <button class="btn btn-primary btn-lg toggleInvert">Destroy SVG Filter</button>
+        <hr /><br />
 	</div>
 	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 	<script src="jquery.invertImages.js"></script>
 	<script>
-		$(function(){
-			$(".invert-it").invertImages();
+	    $(function () {
+            //initialize
+	        $(".invert-it").invertImages();
+
+	        //Script below is just for "destroy" method demonstration
+		    $(".toggleInvert").on("click", function () {
+		        if ($("html").is(".inverted")) {
+		            $(".invert-it").invertImages({ destroy: true });
+		            $(this).html("Apply SVG Filter");
+		        } else {
+		            $(".invert-it").invertImages();
+		            $(this).html("Destroy SVG Filter");
+                }
+		    });
 		});
 	</script>
 </body>
