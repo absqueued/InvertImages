@@ -38,7 +38,7 @@
 		</div>
 		
 		<h2>Processed after InvertImage()</h2>
-		<div class="row">
+		<div class="row invert-row">
 		  <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
 			<a href="#" class="thumbnail well">
 			  <img src="images/appbar.clear.inverse.png" alt="" class="invert-it">
@@ -90,8 +90,14 @@
 	        $(".invert-it").invertImages();
 
 	        //Script below is just for "destroy" method demonstration
+			Modernizr.cssfilters && $(".toggleInvert").text("Toggle CSS3 Filters");
 		    $(".toggleInvert").on("click", function () {
-		        if ($("html").is(".inverted")) {
+		        if(Modernizr.cssfilters) {
+					$(".invert-row img").toggleClass("invert-it");
+					return false;
+				}
+				
+				if ($("html").is(".inverted")) {
 		            $(".invert-it").invertImages({ destroy: true });
 		            $(this).html("Apply SVG Filter");
 		        } else {
