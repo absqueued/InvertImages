@@ -1,20 +1,27 @@
 ﻿/* demo css */
 
+.invert-it {
+    -webkit-filter:invert(1);
+}
+
+
 .thumbnail svg {
 	margin-left:auto;
 	margin-right:auto;
 	display:block;
 }
 
-.invert-it {
-    -webkit-filter:invert(1);
-}
-
 .fork-toolbar .container{
     padding: 10px 0;
     vertical-align: middle;
 }
+
 .fork-toolbar .container * {
     vertical-align: middle;
     margin-right: 10px;
+}
+
+.fork-toolbar .btn .glyphicon {
+	position:relative;
+	top:-1px;
 }
