@@ -46,7 +46,7 @@
 			this.options.svgHeight = this.$elm.height();
 			this.options.svgSource = this.$elm.attr('src');
 
-			this.options.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + this.options.svgImage + '" class="tile-image" viewBox="0 0 ' + this.options.svgWidth + ' ' + this.options.svgHeight + '" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '">';
+			this.options.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + this.options.svgImage + '" class="tile-image '+this.$elm[0].className+' " viewBox="0 0 ' + this.options.svgWidth + ' ' + this.options.svgHeight + '" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '">';
 			this.options.svgContent += '<defs>';
 			this.options.svgContent += '<filter id="filtersPicture_' + this.options.svgImage + '" >';
 			this.options.svgContent += '<feComposite result="inputTo_' + this.options.svgImage + '" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />';
