@@ -35,3 +35,6 @@ Call the `invertImages()` function inside DOM ready to the target image(s).
       });
 	});
 
+###Change Log
+  - Version 1.0.0 - First authord.
+  - Version 1.0.2 - Updating with Bower/NPM updates, configured grunt.

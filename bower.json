@@ -1,0 +1,36 @@
+{
+  "name": "InvertImages",
+  "version": "1.0.2",
+  "homepage": "https://github.com/shekhardesigner/InvertImages",
+  "authors": [
+    "Shekhar Sharma <itsmes.sh@gmail.com>"
+  ],
+  "description": "Invert White Images to Black using SVG, targeted for IE 10 as CSS3 Filters replacement",
+  "main": "jquery.invertImages.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "plugins",
+    "svg",
+    "css3",
+    "invert",
+    "images",
+    "black",
+    "white"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
+    "modernizr": "~2.8.3"
+  }
+}

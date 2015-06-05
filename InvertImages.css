@@ -2,8 +2,10 @@
 
 .invert-it {
     -webkit-filter:invert(1);
+    -ms-filter:invert(1);
+    -o-filter:invert(1);
+    filter:invert(1);
 }
-
 
 .thumbnail svg {
 	margin-left:auto;
