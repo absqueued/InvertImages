@@ -1,6 +1,8 @@
 Invert Images
 ===========
 
+**Version 1.0.3**
+
 Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replacement.
 
 ###Dependencies
@@ -34,3 +36,4 @@ Call the `invertImages()` function inside DOM ready to the target image(s).
 ###Change Log
   - Version 1.0.0 - First authord.
   - Version 1.0.2 - Updating with Bower/NPM updates, configured grunt.
+  - Version 1.0.3 - Destroy option to be passed as string. Garbage cleared (_default was of no use - removed. Destroy actually removes the stored data()); Added more CSS in `.invert-it` class because now more browsers supports the CSS Filters.
