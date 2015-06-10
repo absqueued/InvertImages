@@ -91,7 +91,7 @@
 	<script>
 		$(function () {
             //initialize
-            $(".invert-it").invertImages();
+            $("img.invert-it").invertImages();
 
 	        //Script below is just for "destroy" method demonstration
 			Modernizr.cssfilters && $(".toggleInvert").text("Toggle CSS3 Filters");
@@ -103,10 +103,10 @@
 				}
 
 				if ($("html").is(".inverted")) {
-		            $(".invert-it").invertImages({ destroy: true });
+		            $("img.invert-it").invertImages('destroy');
 		            $(this).html("Apply SVG Filter");
 		        } else {
-		            $(".invert-it").invertImages();
+		            $("img.invert-it").invertImages();
 		            $(this).html("Destroy SVG Filter");
                 }
 		    });

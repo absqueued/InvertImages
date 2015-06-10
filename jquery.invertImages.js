@@ -32,7 +32,7 @@
     var defaults = {
         svgWidth: 20,
 		svgHeight: 20,
-		svgImage: 1,
+		idHash: "",
 		svgSource: "",
 		svgContent: "",
 		cssFilters: false,
@@ -40,12 +40,10 @@
     };
 
     function InvertImages(elm, options) {
-        this.element = elm;
 		this.$elm = $(elm);
 
-        this.options = $.extend({}, defaults, options) ;
-
-        this._defaults = defaults;
+        this.options = $.extend({}, defaults, options);
+        this.options.idHash += Math.floor((Math.random() * 100 )) + new Date().getSeconds() + new Date().getMilliseconds();
 
 		if(this.options.destroy){
 			 this.destroy();
@@ -66,24 +64,23 @@
 			
 			this.options.svgWidth = this.$elm.width();
 			this.options.svgHeight = this.$elm.height();
-			this.options.svgSource = this.$elm.attr('src');
+			this.options.svgSource = this.$elm.attr("src");
 
-			this.options.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + this.options.svgImage + '" class="tile-image '+this.$elm[0].className+' " viewBox="0 0 ' + this.options.svgWidth + ' ' + this.options.svgHeight + '" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '">';
+			this.options.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + this.options.idHash + '" class="tile-image '+this.$elm[0].className+' " viewBox="0 0 ' + this.options.svgWidth + ' ' + this.options.svgHeight + '" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '">';
 			this.options.svgContent += '<defs>';
-			this.options.svgContent += '<filter id="filtersPicture_' + this.options.svgImage + '" >';
-			this.options.svgContent += '<feComposite result="inputTo_' + this.options.svgImage + '" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />';
+			this.options.svgContent += '<filter id="filtersPicture_' + this.options.idHash + '" >';
+			this.options.svgContent += '<feComposite result="inputTo_' + this.options.idHash + '" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />';
 			this.options.svgContent += '<feColorMatrix in="SourceGraphic" type="matrix" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>';
 			this.options.svgContent += '</feComponentTransfer>';
 
 			this.options.svgContent += '</filter>';
 			this.options.svgContent += '</defs>';
-			this.options.svgContent += '<image filter="url(\'#filtersPicture_' + this.options.svgImage + '\')" x="0" y="0" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' + this.options.svgSource + '" />';
+			this.options.svgContent += '<image filter="url(\'#filtersPicture_' + this.options.idHash + '\')" x="0" y="0" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' + this.options.svgSource + '" />';
 			this.options.svgContent += '</svg>';
 
-			this.$elm.addClass('hide');
+			this.$elm.addClass("hide");
 
 			this.$elm.after(this.options.svgContent);
-			this.options.svgImage++;
 			$("html").addClass("inverted");
         },
 
@@ -94,17 +91,27 @@
         },
 		
         //Destroy the SVG Built
-		destroy: function(elm, options){
-			this.$elm.removeClass('hide');
-			$(this.$elm).next().remove();
+		destroy: function(){
+			var $elm = this.$elm;
+			
 			$("html").removeClass("inverted");
+			
+			$elm.next('svg').remove();
+			$elm.removeClass("hide");
+			$elm.removeData('invertImages');
 		}
     };
 
     $.fn.invertImages = function (options) {
         return this.each(function () {
-			$.data(this, "invertImages", new InvertImages(this, options));
+        	var $this = $(this),
+        		data = $(this).data('invertImages'),
+        		option = options;
+
+    		if(!data) $.data(this, "invertImages", new InvertImages(this, option));
+    		if(data && typeof option === 'string') data[option]();
+
         });
     };
 
-})( jQuery, window, document );
+})(jQuery, window, document);
