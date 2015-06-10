@@ -93,13 +93,13 @@
             //initialize
             $("img.invert-it").invertImages();
 
-	        //Script below is just for "destroy" method demonstration
+	        // Script below is just for "destroy" method demonstration
 			Modernizr.cssfilters && $(".toggleInvert").text("Toggle CSS3 Filters");
 
 		    $(".toggleInvert").on("click", function () {
 		        if(Modernizr.cssfilters) {
 					$(".invert-row img").toggleClass("invert-it");
-					return false;
+					return;
 				}
 
 				if ($("html").is(".inverted")) {

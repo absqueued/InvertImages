@@ -2,29 +2,7 @@
  * jQuery Invert Images
  * Licensed under the MIT license
  * Author: @shekhardesigner
- * Version: 1.0.3
- *
- * The MIT License (MIT)
- * 
- * Copyright (c) 2015 Shekhar Sharma <itsmes.sh@gmail.com>
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in
- * the Software without restriction, including without limitation the rights to
- * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
- * the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
-
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
- * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
- * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
- * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
- * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ * Version: 1.0.4
  */
 
  ;(function ($, window, document, undefined) {
@@ -35,8 +13,8 @@
 		idHash: "",
 		svgSource: "",
 		svgContent: "",
-		cssFilters: false,
-		destroy: false
+		rootElm: "html",
+		rootFlag: "inverted"
     };
 
     function InvertImages(elm, options) {
@@ -44,11 +22,6 @@
 
         this.options = $.extend({}, defaults, options);
         this.options.idHash += Math.floor((Math.random() * 100 )) + new Date().getSeconds() + new Date().getMilliseconds();
-
-		if(this.options.destroy){
-			 this.destroy();
-			 return false;
-		};
 		
         this.init();
     }
@@ -57,59 +30,53 @@
 
         //Build SVG and Append
         init: function () {
-		
-            this.options.cssFilters = this.cssSupport("cssfilters");
-            
-            if (this.options.cssFilters) return false;
+
+			var $elm = this.$elm,
+				opts = this.options;
 			
-			this.options.svgWidth = this.$elm.width();
-			this.options.svgHeight = this.$elm.height();
-			this.options.svgSource = this.$elm.attr("src");
+			opts.svgWidth = $elm.width();
+			opts.svgHeight = $elm.height();
+			opts.svgSource = $elm.attr("src");
 
-			this.options.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + this.options.idHash + '" class="tile-image '+this.$elm[0].className+' " viewBox="0 0 ' + this.options.svgWidth + ' ' + this.options.svgHeight + '" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '">';
-			this.options.svgContent += '<defs>';
-			this.options.svgContent += '<filter id="filtersPicture_' + this.options.idHash + '" >';
-			this.options.svgContent += '<feComposite result="inputTo_' + this.options.idHash + '" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />';
-			this.options.svgContent += '<feColorMatrix in="SourceGraphic" type="matrix" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>';
-			this.options.svgContent += '</feComponentTransfer>';
+			opts.svgContent = '<svg xmlns="http://www.w3.org/2000/svg" id="svgroot_' + opts.idHash + '" class="'+$elm[0].className+' " viewBox="0 0 ' + opts.svgWidth + ' ' + opts.svgHeight + '" width="' + opts.svgWidth + '" height="' + opts.svgHeight + '">';
+			opts.svgContent += '<defs>';
+			opts.svgContent += '<filter id="filtersPicture_' + opts.idHash + '" >';
+			opts.svgContent += '<feComposite result="inputTo_' + opts.idHash + '" in="SourceGraphic" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" />';
+			opts.svgContent += '<feColorMatrix in="SourceGraphic" type="matrix" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>';
+			opts.svgContent += '</feComponentTransfer>';
+			opts.svgContent += '</filter>';
+			opts.svgContent += '</defs>';
+			opts.svgContent += '<image filter="url(\'#filtersPicture_' + opts.idHash + '\')" x="0" y="0" width="' + opts.svgWidth + '" height="' + opts.svgHeight + '" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' + opts.svgSource + '" />';
+			opts.svgContent += '</svg>';
 
-			this.options.svgContent += '</filter>';
-			this.options.svgContent += '</defs>';
-			this.options.svgContent += '<image filter="url(\'#filtersPicture_' + this.options.idHash + '\')" x="0" y="0" width="' + this.options.svgWidth + '" height="' + this.options.svgHeight + '" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="' + this.options.svgSource + '" />';
-			this.options.svgContent += '</svg>';
+			$elm.addClass("hide");
 
-			this.$elm.addClass("hide");
-
-			this.$elm.after(this.options.svgContent);
-			$("html").addClass("inverted");
-        },
-
-        //Check CSS Support using Modernizr
-        cssSupport: function (prop) {
-		    if (Modernizr && Modernizr[prop]) return true;
-		    return false;
+			this.$elm.after(opts.svgContent);
+			$(opts.rootElm).addClass(opts.rootFlag);
         },
 		
         //Destroy the SVG Built
 		destroy: function(){
-			var $elm = this.$elm;
+			var $elm = this.$elm,
+				opts = this.options;
 			
-			$("html").removeClass("inverted");
+			$(opts.rootElm).removeClass(opts.rootFlag);
 			
-			$elm.next("svg").remove();
-			$elm.removeClass("hide");
-			$elm.removeData("invertImages");
+			$elm.removeClass("hide").removeData("cj.invertImages").next("svg").remove();
 		}
     };
 
     $.fn.invertImages = function (options) {
+    	//If CSS3 Filter is available in browser, no point invoking this plugin. Lets go back.
+        if (Modernizr && Modernizr.cssfilters) return;
+        
         return this.each(function () {
         	var $this = $(this),
-        		data = $(this).data("invertImages"),
-        		option = options;
+        		data = $(this).data("cj.invertImages"),
+        		option = typeof options === "object" ? options : {};
 
-    		if(!data && typeof option === "object") $.data(this, "invertImages", new InvertImages(this, option));
-    		if(data && typeof option === "string") data[option]();
+    		if(!data) $.data(this, "cj.invertImages", new InvertImages(this, option));
+    		if(data && typeof options === "string") data[options]();
 
         });
     };
