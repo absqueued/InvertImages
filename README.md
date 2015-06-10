@@ -29,7 +29,7 @@ Call the `invertImages()` function inside DOM ready to the target image(s).
 	$(function () {
 	    $("img.toDestroy").invertImages('destroy');
 	});
-
+```
 
 ###Change Log
   - Version 1.0.0 - First authord.
