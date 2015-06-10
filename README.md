@@ -19,7 +19,8 @@ Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replac
  - Blog post(coming soon!)
 
 ###How-To
-Call the `invertImages()` function inside DOM ready to the target image(s).
+  1. Add `jquery.invertImages.min.js` to your HTML.
+  2. Call the `invertImages()` function inside DOM ready to the target image(s).
 
 ```javascript
 	//Initialize
