@@ -1,7 +1,7 @@
 Invert Images
 ===========
 
-**Version 1.0.3**
+**Version 1.0.4**
 
 Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replacement.
 
