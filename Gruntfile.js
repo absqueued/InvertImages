@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 			},
 			dist: {
 				files: {
-					'jquery.invertImages.min.js': ['jquery.invertImages.js']
+					'dist/jquery.invertImages.min.js': ['jquery.invertImages.js']
 				}
 			}
 		},

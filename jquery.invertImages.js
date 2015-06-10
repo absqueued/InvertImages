@@ -2,11 +2,11 @@
  * jQuery Invert Images
  * Licensed under the MIT license
  * Author: @shekhardesigner
- * Version: 1.0.2
+ * Version: 1.0.3
  *
  * The MIT License (MIT)
  * 
- * Copyright (c) 2013 Shekhar Sharma
+ * Copyright (c) 2015 Shekhar Sharma <itsmes.sh@gmail.com>
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -96,20 +96,20 @@
 			
 			$("html").removeClass("inverted");
 			
-			$elm.next('svg').remove();
+			$elm.next("svg").remove();
 			$elm.removeClass("hide");
-			$elm.removeData('invertImages');
+			$elm.removeData("invertImages");
 		}
     };
 
     $.fn.invertImages = function (options) {
         return this.each(function () {
         	var $this = $(this),
-        		data = $(this).data('invertImages'),
+        		data = $(this).data("invertImages"),
         		option = options;
 
-    		if(!data) $.data(this, "invertImages", new InvertImages(this, option));
-    		if(data && typeof option === 'string') data[option]();
+    		if(!data && typeof option === "object") $.data(this, "invertImages", new InvertImages(this, option));
+    		if(data && typeof option === "string") data[option]();
 
         });
     };

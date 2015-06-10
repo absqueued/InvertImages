@@ -1,0 +1,10 @@
+node_modules/
+bower_components/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+*.log
+*.Cache
