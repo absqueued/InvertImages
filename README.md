@@ -34,6 +34,13 @@ Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replac
 	});
 ```
 
+###Other Options
+| Option | Default Value | Description | 
+|---|---|---|
+| rootElm | html | Root element where you wish a flag/class to be added once plugin convert image using SVG|
+| rootFlag | inverted | A class to be added on `rootElm`.
+
+
 ###Change Log
   - **Version 1.0.0** - First authord.
   - **Version 1.0.2** - Updating with Bower/NPM updates, configured grunt.
