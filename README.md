@@ -6,19 +6,19 @@ Invert Images
 Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replacement.
 
 
-###Browser Support
+## Browser Support
 - Internet Explorer 10
 - Chrome/Firefox Supports CSS3 filter
 
-###Demo
+## Demo
  - [Working Demo](http://shekhardesigner.github.io/InvertImages/)
  - Blog post(coming soon!)
 
-###Prerequisite
+## Prerequisite
  - [Modernizr](http://modernizr.com/download/#-inlinesvg-svg-shiv-cssclasses-prefixes-css_filters) with CSS Filters and Prefixed  detection enabled.
  - jQuery 1.x
 
-###How-To
+## How-To
   1. Make sure Modernizr (with CSS Filters) and jQuery is added to your HTML file.
   2. Add `jquery.invertImages.min.js` to your HTML file.
   3. Call the `invertImages()` function inside DOM ready to the target image(s).
@@ -35,14 +35,14 @@ Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replac
 	});
 ```
 
-###Other Options
+## Other Options
 | Option | Default Value | Description | 
 |---|---|---|
 | rootElm | html | Root element where you wish a flag/class to be added once plugin convert image using SVG|
 | rootFlag | inverted | A class to be added on `rootElm`.
 
 
-###Change Log
+## Change Log
   - **Version 1.0.0** - First authored.
   - **Version 1.0.2** - Updating with Bower/NPM updates, configured grunt.
   - **Version 1.0.3** - Destroy option to be passed as string. Garbage cleared (_default was of no use - removed. Destroy actually removes the stored data()); Added more CSS in `.invert-it` class because now more browsers supports the CSS Filters.
