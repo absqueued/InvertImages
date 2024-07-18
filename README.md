@@ -11,7 +11,7 @@ Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replac
 - Chrome/Firefox Supports CSS3 filter
 
 ## Demo
- - [Working Demo](http://shekhardesigner.github.io/InvertImages/)
+ - [Working Demo](https://absqueued.github.io/InvertImages/)
  - Blog post(coming soon!)
 
 ## Prerequisite
@@ -42,7 +42,7 @@ Invert White Images to Black using SVG, targeted for IE10 as CSS3 Filters replac
 | rootFlag | inverted | A class to be added on `rootElm`.
 
 
-## Change Log
+## Changelog
   - **Version 1.0.0** - First authored.
   - **Version 1.0.2** - Updating with Bower/NPM updates, configured grunt.
   - **Version 1.0.3** - Destroy option to be passed as string. Garbage cleared (_default was of no use - removed. Destroy actually removes the stored data()); Added more CSS in `.invert-it` class because now more browsers supports the CSS Filters.
